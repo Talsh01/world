@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Country } from 'src/app/shared/models/country,model';
 import { Router } from '@angular/router';
+import { WorldService } from 'src/app/core/services/world.service';
 
 @Component({
   selector: 'app-continent-countries-page',
@@ -10,22 +11,15 @@ import { Router } from '@angular/router';
 export class ContinentCountriesPageComponent implements OnInit {
 
   continentName: string;
+  continentCode: string;
   countries: Array<Country>;
 
-  constructor(private router: Router) { 
-    // TODO: remove mock and get data from server
-    this.countries = [
-      {code: "IL", name: "Israel", phone: "972", capital: "Capital1", currency: "$", languages: [{name: "HEB"}]},
-      {code: "ES", name: "Spain", phone: "54", capital: "Capital1", currency: "$", languages: [{name: "HEB"}]},
-      {code: "CL", name: "Chile", phone: "56", capital: "Capital1", currency: "$", languages: [{name: "HEB"}]},
-      {code: "ZA", name: "South Africa", phone: "88", capital: "Capital1", currency: "$", languages: [{name: "HEB"}]},
-      {code: "AA", name: "NonExisting", phone: "01", capital: "Capital1", currency: "$", languages: [{name: "HEB"}]},
-      {code: "BB", name: "NonExisting", phone: "02", capital: "Capital1", currency: "$", languages: [{name: "HEB"}, {name:"ENG"}]}
-    ];
-
-    this.continentName = localStorage.getItem("continentName");
-
-    // Get countries
+  constructor(private router: Router,
+    private worldService: WorldService) { 
+      
+      this.continentName = localStorage.getItem("continentName");
+      this.continentCode = localStorage.getItem("continentCode");
+      this.worldService.getCountries(this.continentCode).then(res => this.countries = res);
   }
 
   ngOnInit(): void {
@@ -33,6 +27,7 @@ export class ContinentCountriesPageComponent implements OnInit {
 
   back() {
     localStorage.removeItem("continentName");
+    localStorage.removeItem("continentCode");
     this.router.navigate(["/"]);
   }
 

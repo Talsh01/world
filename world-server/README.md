@@ -17,7 +17,7 @@ Get all continents data - Get request
 ### Get a list of countries by continent code
 
 Get a list of countries by a continent - Post request
-must provide continent-code in request body
+must provide continentcode in request body
 
 > http://localhost:8080/api/getcountries
 
