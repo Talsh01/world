@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { ContinentPageGuard } from './core/guards/continentPage.guard';
+import { NgxConfigureModule, NgxConfigureOptions } from 'ngx-configure';
+import { AppOptions } from './core/utils/app.options';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,11 @@ import { ContinentPageGuard } from './core/guards/continentPage.guard';
     BrowserModule,
     AppRoutingModule,
     FeaturesModule,
-    SharedModule
+    SharedModule,
+    NgxConfigureModule.forRoot()
   ],
-  providers: [ContinentPageGuard],
+  providers: [ContinentPageGuard,
+    { provide: NgxConfigureOptions, useClass: AppOptions }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
