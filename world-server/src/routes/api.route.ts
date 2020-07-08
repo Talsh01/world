@@ -12,7 +12,7 @@ export class ApiRouter {
         this.router.get('/getcontinents', 
                         this.apiController.getcontinents.bind(this.apiController));
         this.router.post('/getcountries', 
-                        [check('continent-code', 'No continent code was provided').exists()],
+                        [check('continentcode', 'No continent code was provided').exists()],
                         this.apiController.getcountries.bind(this.apiController));
     }
 }

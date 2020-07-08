@@ -17,8 +17,9 @@ export class ContinentsListItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  continentPage(name: string) {
+  continentPage(name: string, code: string) {
     localStorage.setItem("continentName", name);
+    localStorage.setItem("continentCode", code);
     this.router.navigate(["/continentPage"]);
   }
 

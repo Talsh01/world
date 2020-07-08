@@ -23,7 +23,7 @@ export class ApiController {
             return res.status(HttpStatusCodes.BAD_REQUEST).json({ errors: errors.array() });
         }
 
-        const countries = await this.apiService.getcountries(req.body[`continent-code`]);
+        const countries = await this.apiService.getcountries(req.body[`continentcode`]);
         res.status(200).json(countries);
     }
 }

@@ -8,7 +8,7 @@ export class ContinentPageGuard implements CanActivate {
     constructor(public router: Router){}
 
     canActivate(): boolean {
-        if (!localStorage.getItem("continentName")) {
+        if (!localStorage.getItem("continentName") || !localStorage.getItem("continentCode")) {
             this.router.navigate(["/"]);
         }
 
