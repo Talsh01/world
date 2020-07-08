@@ -1,0 +1,16 @@
+<button mat-raised-button color="primary" class="button" (click)="back()">Back</button>
+
+<div class="container">
+    <h1>{{continentName}}</h1>
+    <div class="countries-container">
+        <div *ngFor="let country of countries">
+            <app-country-card [code]="country.code"
+                                [name]="country.name"
+                                [phone]="country.phone" 
+                                [capital]="country.capital" 
+                                [currency]="country.currency"
+                                [languages]="country.languages">
+            </app-country-card>
+        </div>
+    </div>
+</div>

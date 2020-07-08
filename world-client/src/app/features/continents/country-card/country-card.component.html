@@ -1,0 +1,15 @@
+<mat-card class="country-card">
+    <mat-card-header>
+      <div mat-card-avatar>
+          <img [src]="flagUrl" (error)=imgNotFound($event) style="width: 100%; height: 100%;">
+      </div>
+      <mat-card-title><h3>{{code}}</h3></mat-card-title>
+      <mat-card-subtitle><h1>{{name}}</h1></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Phone: {{phone}} | Capital: {{capital}} | Currency: {{currency}} 
+        | Languages: {{languegesDisplayString}}
+      </p>
+    </mat-card-content>
+  </mat-card>

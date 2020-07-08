@@ -1,0 +1,8 @@
+<div class="container">
+    <h1>Continents</h1>
+    <div *ngFor="let continent of continents"> 
+        <div>
+        <app-continents-list-item [code]="continent.code" [name]="continent.name"></app-continents-list-item>
+        </div>
+    </div>
+</div>
