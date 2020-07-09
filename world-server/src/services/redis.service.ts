@@ -25,10 +25,14 @@ export class RedisService {
         });
     }
 
-    private saveContinents() {
+    private async saveContinents() {
         // Fetch data from repository
-        this.apiService.getcontinentsFromRepository().then(res => {
-            for (let continent of res) {
+        let continents = await this.apiService.getcontinentsFromRepository();
+
+        if (continents.errors) {
+            console.log(`${continents.errors}; Cached data available only.`);
+        } else {
+            for (let continent of continents) {
                 // Save to redis
                 let continentKey = `continent:${continent.code}`;
                 this.redisClient.hmset(`${continentKey}`,
@@ -38,24 +42,29 @@ export class RedisService {
                 
                 this.saveCountries(continent.code);
             }
-        });
+        }
     }
 
     private async saveCountries(continentCode: string) {
         // Fetch data from repository
         const countries = await this.apiService.getCountriesFromRepository(continentCode);
-        for (let country of countries) {
-            // Save to redis
-            let languages = (country.languages as Array<any>).map(x => x.name).join(', ');
-            let countryKey = `country:${continentCode}:${country.code}`;
-            this.redisClient.hmset(`${countryKey}`,
-            `code`, `${country.code}`,  
-            `name`, `${country.name}`,
-            `phone`, `${country.phone}`,  
-            `capital`, `${country.capital}`,
-            `currency`, `${country.currency}`,  
-            `languages`, `${languages}`,
-            );
+
+        if (countries.errors) {
+            console.log(`${countries.errors}; Cached data available only.`);
+        } else {
+            for (let country of countries) {
+                // Save to redis
+                let languages = (country.languages as Array<any>).map(x => x.name).join(', ');
+                let countryKey = `country:${continentCode}:${country.code}`;
+                this.redisClient.hmset(`${countryKey}`,
+                `code`, `${country.code}`,  
+                `name`, `${country.name}`,
+                `phone`, `${country.phone}`,  
+                `capital`, `${country.capital}`,
+                `currency`, `${country.currency}`,  
+                `languages`, `${languages}`,
+                );
+            }
         }
     }
 
