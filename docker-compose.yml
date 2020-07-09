@@ -1,0 +1,28 @@
+version: "3"
+services:
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+  world-server:
+    build:
+      context: ./world-server
+      dockerfile: Dockerfile
+    links:
+    - redis
+    environment:
+      ENV_NAME: dev
+    container_name: world-server
+    ports:
+      - 8080:8080
+  world-client:
+    build:
+      context: ./world-client
+      dockerfile: Dockerfile
+    ports:
+      - "4201:4201"
+    container_name: world-client
+    volumes:
+       - ./world-client:/usr/src/app/world-client
+       - /usr/src/app/world-client/node_modules
