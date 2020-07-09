@@ -1,3 +1,6 @@
 {
-    "dataEndpoint": "https://countries.trevorblades.com/"
+    "dataEndpoint": "https://countries.trevorblades.com/",
+    "redisPort": "6379",
+    "redisHost": "127.0.0.1",
+    "intervalForDataFetch": "120000"
 }

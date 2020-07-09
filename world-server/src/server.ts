@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import { ApiRouter } from './routes/api.route';
 
 // Import middlewares
-import middleware from './middleware/middleware';
+import setupRedis from './middleware/setupRedis';
 
 const port = process.env.PORT || 8080;
 
@@ -18,8 +18,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-// Use middleware
-middleware();
+// Connet to redis and cache data
+setupRedis();
 
 // Set routes
 app.use('/api', new ApiRouter().router);
