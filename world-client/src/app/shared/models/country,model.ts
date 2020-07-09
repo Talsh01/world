@@ -4,9 +4,5 @@ export class Country {
     phone: string
     capital: string
     currency: string
-    languages: Array<Language>
-}
-
-export class Language {
-    name: string
+    languages: string
 }

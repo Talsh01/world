@@ -6,6 +6,11 @@ REST API for getting information about the world continents & countries from htt
 
 For development, you will only need Node.js and npm installed in your environement.
 
+## Development server
+
+Run `npm install`, then `npm run dev` for a dev server.
+    
+
 ## API
 
 ### Get all continents
